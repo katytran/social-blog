@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import BlogCard from "../components/BlogCard";
@@ -15,13 +16,13 @@ const HomePage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(blogActions.getPosts(pageNum, limit, field_name), [
-      dispatch,
-      pageNum,
-      limit,
-      field_name,
-    ]);
-  });
+    dispatch(blogActions.getPosts(pageNum, limit, field_name) );
+  },[
+    dispatch,
+    pageNum,
+    limit,
+    field_name,
+  ]);
   const handleClickBlogCard = (id) => {
     history.push(`/blogs/${id}`)
   }
@@ -31,10 +32,13 @@ const HomePage = () => {
         <h1>Loading...</h1>
       ) : (
         <div>
-          {/* {blogs.map((blog) => (
-            <BlogCard blog={blog} handleClickBlogCard={handleClickBlogCard} />
-          ))} */}
-          Homepage
+          <Container>
+          {blogs.map((blog) => (
+            <BlogCard blog={blog} key={blog._id} handleClickBlogCard={handleClickBlogCard} />
+          ))}
+
+          </Container>
+          
         </div>
       )}
     </div>

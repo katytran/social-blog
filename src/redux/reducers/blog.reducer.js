@@ -2,7 +2,7 @@ import * as types from "../constants/blog.constants";
 
 const initialState = {
   blogPosts : [],
-  loading : false,
+  loading : true,
   selectedPost : null,
 };
 
@@ -12,7 +12,7 @@ const blogReducer = (state = initialState, action) => {
     case types.GET_POSTS_REQUEST:
       return {...state, loading : true};
     case types.GET_POSTS_SUCCESS:
-      return {...state, blogPosts: payload , loading : false};
+      return {...state, blogPosts: payload, loading : false };
     case types.GET_POSTS_FAILURE:
       return {...state, loading : false};
     default:
