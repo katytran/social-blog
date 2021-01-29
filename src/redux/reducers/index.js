@@ -1,6 +1,8 @@
-const rootReducer = (state, action) => {
-  return state;
-};
+import { combineReducer } from "react-redux";
+import authReducer from "./auth.reducer";
+import blogReducer from "./blog.reducer";
 
-export default rootReducer;
-
+export default combineReducer({
+  auth: authReducer,
+  blog: blogReducer,
+});
