@@ -1,13 +1,24 @@
 import * as types from "../constants/blog.constants";
 
-const initialState = {};
+const initialState = {
+  blogPosts : [],
+  loading : false,
+  selectedPost : null,
+};
 
 const blogReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const {type, payload} = action;
   switch (type) {
+    case types.GET_POSTS_REQUEST:
+      return {...state, loading : true};
+    case types.GET_POSTS_SUCCESS:
+      return {...state, blogPosts: payload , loading : false};
+    case types.GET_POSTS_FAILURE:
+      return {...state, loading : false};
     default:
-      state;
+      return state;
   }
+  
 };
 
 export default blogReducer;
