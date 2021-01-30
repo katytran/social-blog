@@ -14,9 +14,9 @@ const api = axios.create({
 api.interceptors.request.use(
   (request) => {
     console.log("Starting Request", request);
-    const token = localStorage.getItem("token");
-    if (token) {
-      request.headers["Authorization"] = "Bearer " + token;
+    const token = localStorage.getItem("token")
+    if(token) {
+      request.headers['Authorization'] = 'Bearer ' + token;
     }
     return request;
   },
@@ -28,15 +28,15 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     console.log("Response:", response);
-    if (response.data.data.accessToken) {
-      localStorage.setItem("token", response.data.data.accessToken);
+    if(response.data.data.accessToken) {
+      localStorage.setItem("token", response.data.data.accessToken)
     }
     return response;
   },
   function (error) {
     error = error.response.data;
     console.log("RESPONSE ERROR", error);
-    return Promise.reject({ message: error.errors.message });
+    return Promise.reject({ message: error.errors.message});
   }
 );
 
