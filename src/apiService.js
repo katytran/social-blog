@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: process.env.REACT_APP_BACKEND_API,
-  baseURL: "https://social-blog-cs.herokuapp.com/api",
+  baseURL: process.env.REACT_APP_BACKEND_API,
+  // baseURL: "https://social-blog-cs.herokuapp.com/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -14,7 +14,10 @@ const api = axios.create({
 api.interceptors.request.use(
   (request) => {
     console.log("Starting Request", request);
-    
+    const token = localStorage.getItem("token")
+    if(token) {
+      request.headers['Authorization'] = 'Bearer ' + token;
+    }
     return request;
   },
   function (error) {
@@ -25,6 +28,9 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     console.log("Response:", response);
+    if(response.data.data.accessToken) {
+      localStorage.setItem("token", response.data.data.accessToken)
+    }
     return response;
   },
   function (error) {

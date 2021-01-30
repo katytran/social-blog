@@ -1,13 +1,13 @@
-import * as types from "../constants/blog.constants";
+// import * as types from "../constants/blog.constants";
 
-const initialState = {};
+// const initialState = {};
 
-const blogReducer = (state = initialState, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    default:
-      state;
-  }
-};
+// const blogReducer = (state = initialState, action) => {
+//   const { type, payload } = action;
+//   switch (type) {
+//     default:
+//       state;
+//   }
+// };
 
-export default blogReducer;
+// export default blogReducer;

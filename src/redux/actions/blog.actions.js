@@ -1,5 +1,5 @@
 import * as types from "../constants/blog.constants";
 
-const authAction = {};
+const blogAction = {};
 
-export default authAction;
+export default blogAction;

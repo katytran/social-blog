@@ -1,21 +1,30 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./containers/HomePage";
+import LoginPage from "./containers/LoginPage";
+import RegisterPage from "./containers/RegisterPage";
+import AdminPage from './containers/Admin/AdminPage'
 import { BrowserRouter as Router } from "react-router-dom";
+import PublicNavBar from './components/PublicNavBar'
+import {Row, Col} from 'react-bootstrap'
 
 function App() {
   return (
     <div className="App">
-      <Switch>
-        <Router>
-          <Route exact path="/" component={HomePage} />
+      <Row>
+          <Col xs={12} className="">
+          <PublicNavBar />
+          </Col>
+        </Row>
+      <Router>
+        <Switch>
+          <Route path="/admin" component={AdminPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
-        </Router>
-      </Switch>
+          <Route exact path="/" component={HomePage} />
+        </Switch>
+      </Router>
     </div>
   );
 }
