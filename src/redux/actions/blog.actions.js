@@ -30,9 +30,24 @@ const getSingleBlog = (id) => async (dispatch) => {
     dispatch({ type: types.GET_SINGLE_BLOGS_FAILURE, payload: error });
   }
 };
+
+const createReview = (blogId, review) => async (dispatch) => {
+  dispatch({ type: types.CREATE_REVIEW_REQUEST });
+  console.log("blog id");
+  try {
+    const res = await api.post(`/reviews/blogs/${blogId}`, {
+      content: review,
+    });
+    console.log("create blog", res.data.data);
+    dispatch({ type: types.CREATE_REVIEW_SUCCESS, payload: res.data.data });
+  } catch (error) {
+    dispatch({ type: types.CREATE_REVIEW_FAILURE, payload: error });
+  }
+};
 const blogActions = {
   getBlogs,
   getSingleBlog,
+  createReview,
 };
 
 export default blogActions;

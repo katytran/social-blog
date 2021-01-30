@@ -5,8 +5,9 @@ import { useHistory } from "react-router-dom";
 
 import BlogCard from "../components/BlogCard";
 import blogActions from "../redux/actions/blog.actions";
-import PaginationBar from "../components/PaginationBar";
 import Grid from "@material-ui/core/Grid";
+import PaginationBar from "../components/PaginationBar";
+
 const HomePage = () => {
   const [pageNum, setPageNum] = useState(1);
   const [field_name, setField_name] = useState("");
