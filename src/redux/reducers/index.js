@@ -1,8 +1,8 @@
-import { combineReducer } from "react-redux";
+import { combineReducers } from "redux";
 import authReducer from "./auth.reducer";
 import blogReducer from "./blog.reducer";
 
-export default combineReducer({
+export default combineReducers({
   auth: authReducer,
   blog: blogReducer,
 });
