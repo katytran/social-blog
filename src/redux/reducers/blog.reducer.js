@@ -9,6 +9,7 @@ const initialState = {
   //single blog
   selectedBlog: null,
   loadingSelectedBlog: true,
+  loadingSubmitReview: true,
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -34,6 +35,21 @@ const blogReducer = (state = initialState, action) => {
       return { ...state, loadingSelectedBlog: false, selectedBlog: payload };
     case types.GET_SINGLE_BLOGS_FAILURE:
       return { ...state, loadingSelectedBlog: false };
+
+    // create reviews
+    case types.CREATE_REVIEW_REQUEST:
+      return { ...state, loadingSubmitReview: true };
+    case types.CREATE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loadingSubmitReview: false,
+        selectedBlog: {
+          ...state.selectedBlog,
+          reviews: [...state.selectedBlog.reviews, payload],
+        },
+      };
+    case types.CREATE_REVIEW_FAILURE:
+      return { ...state, loadingSubmitReview: false };
     default:
       return state;
   }
