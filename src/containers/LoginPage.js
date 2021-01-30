@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import LoginForm from "../components/LoginForm";
 import PublicNavBar from "../components/PublicNavBar";
 import {useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link} from 'react-router-dom'
 import HomePage from './HomePage'
 
 const LoginPage = () => {
@@ -25,6 +25,7 @@ const LoginPage = () => {
             <LoginForm />
           </Col>
         </Row>
+        <span>Don't have an account? <Link to="/register">Sign Up</Link></span>
       </Container>
     </div>
   );}
