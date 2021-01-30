@@ -11,6 +11,8 @@ body {
   overflow-x: hidden;
   padding: 0;
   margin: 0;
+  background-image: url("https://t4.ftcdn.net/jpg/03/16/76/45/360_F_316764544_Q41R8DGQXRyrkFSlA7MDLRDKAdCKH5tX.jpg");
+  
 }
 
 .CardContainer {
@@ -40,4 +42,11 @@ body {
   left: 30%;
   width: 60%;
   height: 100%;
+}
+.jumbotron {
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190619/ourmid/pngtree-travel-around-the-world-travel-poster-template-image_140335.jpg");
+  background-size: cover;
+}
+.card {
+  cursor: pointer;
 }

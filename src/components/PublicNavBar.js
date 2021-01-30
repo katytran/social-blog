@@ -1,4 +1,4 @@
-// hamburger -> admin logout
+
 import React, { useEffect } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
@@ -6,6 +6,7 @@ import LoginPage from "../containers/LoginPage";
 import AdminPage from "../containers/Admin/AdminPage";
 import ProfilePage from "../containers/Admin/AdminSideBar/ProfilePage";
 import { useSelector } from "react-redux";
+import logo from '../images/logo.png'
 
 const PublicNavBar = () => {
   let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -15,9 +16,9 @@ const PublicNavBar = () => {
 
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" style={{backgroundColor:"#dffaf9"}} variant="light">
         <Navbar.Brand as={Link} to="/">
-          BA SOCIAL BLOG
+          <img style={{height:'4.5em'}}src={logo} atl="logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

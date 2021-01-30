@@ -31,10 +31,10 @@ const BlogCard = ({ blog, handleClickBlogCard }) => {
   const classes = useStyles();
 
   return (
-    <Grid item xl={12}>
+    <Grid style={{cursor:"pointer"}} item xl={12}>
       <Card
         className={classes.root}
-        style={{ width: "18rem", height: "100%" }}
+        style={{ width: "18rem", height: "25em" }}
         onClick={() => handleClickBlogCard(blog._id)}
       >
         <CardHeader

@@ -4,7 +4,7 @@ import LoginForm from "../components/LoginForm";
 import PublicNavBar from "../components/PublicNavBar";
 import {useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import AdminPage from './Admin/AdminPage'
+import HomePage from './HomePage'
 
 const LoginPage = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -18,8 +18,8 @@ const LoginPage = () => {
   if(!isAuthenticated){
   return (
     <div>
-      <Container>
-        <h1>LOGIN</h1>
+      <Container className="mt-5">
+        <h1>Sign In</h1>
         <Row className="justify-content-md-center">
           <Col xs={6}>
             <LoginForm />
@@ -29,7 +29,7 @@ const LoginPage = () => {
     </div>
   );}
   else {
-    return <div><AdminPage/></div>
+    return <div><HomePage/></div>
   }
 };
 

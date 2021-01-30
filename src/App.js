@@ -6,6 +6,7 @@ import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
 import AdminPage from "./containers/Admin/AdminPage";
 import BlogDetailPage from "./containers/BlogDetailPage";
+import AddBlog from "./containers/AddBlog";
 import { BrowserRouter as Router } from "react-router-dom";
 import PublicNavBar from "./components/PublicNavBar";
 import { Row, Col } from "react-bootstrap";
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
+          <Route path="/blogs/add" component={AddBlog}/>
           <Route exact path="/blogs/:blogId" component={BlogDetailPage} />
         </Switch>
       </Router>

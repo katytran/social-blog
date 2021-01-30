@@ -8,7 +8,7 @@ function PaginationBar({ pageNum, setPageNum, totalPages }) {
   };
 
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center mt-4 mb-4">
       <Pagination
         count={totalPages}
         variant="outlined"
