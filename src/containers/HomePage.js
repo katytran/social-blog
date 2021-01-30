@@ -33,7 +33,7 @@ const HomePage = () => {
         <h1>Loading...</h1>
       ) : (
         <div>
-          <PaginationBar
+        <PaginationBar
             pageNum={pageNum}
             setPageNum={setPageNum}
             totalPages={totalPages}
