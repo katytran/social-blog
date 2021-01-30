@@ -5,8 +5,8 @@ import { useHistory } from "react-router-dom";
 
 import BlogCard from "../components/BlogCard";
 import blogActions from "../redux/actions/blog.actions";
-import PaginationBar from "../components/PaginationBar";
 import Grid from "@material-ui/core/Grid";
+
 const HomePage = () => {
   const [pageNum, setPageNum] = useState(1);
   const [field_name, setField_name] = useState("");
@@ -32,11 +32,6 @@ const HomePage = () => {
         <h1>Loading...</h1>
       ) : (
         <div>
-          <PaginationBar
-            pageNum={pageNum}
-            setPageNum={setPageNum}
-            totalPages={totalPages}
-          />
           <Grid container direction="row" justify="center" alignItems="center">
             <Grid
               container

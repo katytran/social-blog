@@ -6,11 +6,13 @@ import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
 import BlogDetailPage from "./containers/BlogDetailPage";
 import { BrowserRouter as Router } from "react-router-dom";
+import PublicNavBar from "./components/PublicNavBar";
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <PublicNavBar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
