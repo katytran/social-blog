@@ -7,9 +7,9 @@ import AdminPage from "./Admin/AdminPage";
 const RegisterPage = () => {
   const registered = useSelector((state) => state.user.registered);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  //useState here with names, email, 
+  //useState here with names, email,
   //useDispatch to make the put request
-  
+
   if (!registered) {
     return (
       <div>

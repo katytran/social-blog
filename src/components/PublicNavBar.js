@@ -1,21 +1,24 @@
 // hamburger -> admin logout
-import React, {useEffect} from "react";
-import {BrowserRouter, Link} from 'react-router-dom'
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import React, { useEffect } from "react";
+import { BrowserRouter, Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import LoginPage from "../containers/LoginPage";
-import AdminPage from "../containers/Admin/AdminPage"
-import ProfilePage from '../containers/Admin/AdminSideBar/ProfilePage'
-import {useSelector} from 'react-redux'
+import AdminPage from "../containers/Admin/AdminPage";
+import ProfilePage from "../containers/Admin/AdminSideBar/ProfilePage";
+import { useSelector } from "react-redux";
 
 const PublicNavBar = () => {
-  let isAuthenticated = useSelector(state => state.auth.isAuthenticated)
-  useEffect(()=>{
-    return isAuthenticated
-  }, [isAuthenticated])
+  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  useEffect(() => {
+    return isAuthenticated;
+  }, [isAuthenticated]);
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Group Ba</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          BA SOCIAL BLOG
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -34,9 +37,33 @@ const PublicNavBar = () => {
               </NavDropdown.Item>
             </NavDropdown> */}
           </Nav>
-          
-            {!isAuthenticated ? (<Nav><Nav.Link eventKey={"register"} href="/register">Register</Nav.Link><Nav.Link eventKey={"login"} href="/login">Login</Nav.Link></Nav>): (<Nav><Nav.Link eventKey={"admin"} href="/admin">Admin</Nav.Link><Nav.Link eventKey={"logout"} href="/login" onClick={(()=> {isAuthenticated = false})}>Logout</Nav.Link></Nav>)}
-          
+
+          {!isAuthenticated ? (
+            <Nav>
+              <Nav.Link eventKey={"register"} as={Link} to="/register">
+                Register
+              </Nav.Link>
+              <Nav.Link eventKey={"login"} as={Link} to="/login">
+                Login
+              </Nav.Link>
+            </Nav>
+          ) : (
+            <Nav>
+              <Nav.Link eventKey={"admin"} as={Link} to="/admin">
+                Admin
+              </Nav.Link>
+              <Nav.Link
+                eventKey={"logout"}
+                as={Link}
+                to="/login"
+                onClick={() => {
+                  isAuthenticated = false;
+                }}
+              >
+                Logout
+              </Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </div>
