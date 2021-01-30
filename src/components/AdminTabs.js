@@ -7,8 +7,8 @@ import MessengerPage from "../containers/Admin/AdminSideBar/MessengerPage";
 
 const AdminTabs = () => {
   return (
-    <div>
-      <Tab.Container id="adminPage" defaultActiveKey="first">
+    <div className="mt-5">
+      <Tab.Container  id="adminPage" defaultActiveKey="first">
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
@@ -27,7 +27,7 @@ const AdminTabs = () => {
             </Nav>
           </Col>
           <Col sm={9}>
-            <Tab.Content>
+            <Tab.Content >
               <Tab.Pane eventKey="a">
                 <ProfilePage />
               </Tab.Pane>
