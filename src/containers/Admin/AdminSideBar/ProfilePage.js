@@ -13,21 +13,22 @@ import authActions from "../../../redux/actions/auth.actions";
 const ProfilePage = () => {
   const currentUser = useSelector((state) => state.auth.user);
   const [editable, setEditable] = useState(false);
-  const [profileData, setProfileData] = useState({
-    name: currentUser.name,
-    email: currentUser.email,
-    avatarUrl: currentUser.avatarUrl,
-  });
+  // const [profileData, setProfileData] = useState({
+  //   name: currentUser.name,
+  //   email: currentUser.email,
+  //   avatarUrl: currentUser.avatarUrl,
+  // });
   const dispatch = useDispatch();
   const [name, setName] = useState(currentUser.name)
   const [email, setEmail] = useState(currentUser.email)
+  const [avatarUrl, setAvatarUrl] = useState(currentUser.avatarUrl)
 
   useEffect(() => {
     dispatch(authActions.getCurrentUser());
   }, [dispatch]);
 
   const handleSubmit = (e) => {
-    const { name, avatarUrl } = profileData;
+    // const { name, avatarUrl } = profileData;
     dispatch(authActions.updateProfile(name, avatarUrl));
     setEditable(false);
   };
@@ -45,10 +46,7 @@ const ProfilePage = () => {
       function (error, result) {
         if (error) console.log(error);
         if (result && result.length && !error) {
-          setProfileData({
-            ...profileData,
-            avatarUrl: result[0].secure_url,
-          });
+          setAvatarUrl(result[0].secure_url);
         }
       }
     );
@@ -69,10 +67,10 @@ const ProfilePage = () => {
         <Row className="row-content">
           <Form onSubmit={(e)=> {e.preventDefault(); handleSubmit()}}>
             <Form.Group>
-              {profileData.avatarUrl && (
+              {avatarUrl && (
                 <img
                   className="avatar_pf"
-                  src={profileData.avatarUrl}
+                  src={avatarUrl}
                   alt="avatarUrl"
                 />
               )}
@@ -94,9 +92,9 @@ const ProfilePage = () => {
                   className="form-input"
                   type="text"
                   required
-                  placeholder="Name"
+                  placeholder={name}
                   name="name"
-                  value={profileData.name}
+                  value={name}
                   onChange={(e)=>{setName(e.target.value)}}
                   disabled={!editable}
                 />
@@ -110,9 +108,10 @@ const ProfilePage = () => {
                 <Form.Control
                   className="form-input"
                   type="email"
-                  placeholder={profileData.email}
+                  placeholder={email}
                   name="email"
-                  value={profileData.email}
+                  value={email}
+                  onChange={(e)=>{setEmail(e.target.value)}}
                   disabled={!editable}
                 />
               </Col>
