@@ -1,29 +1,69 @@
-
 import React, { useEffect } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import LoginPage from "../containers/LoginPage";
 import AdminPage from "../containers/Admin/AdminPage";
 import ProfilePage from "../containers/Admin/AdminSideBar/ProfilePage";
-import { useSelector } from "react-redux";
-import logo from '../images/logo.png'
+import { useSelector, useDispatch } from "react-redux";
+import logo from "../images/logo.png";
+import authActions from "../redux/actions/auth.actions";
 
 const PublicNavBar = () => {
-  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  useEffect(() => {
-    return isAuthenticated;
-  }, [isAuthenticated]);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const loading = useSelector((state) => state.auth.loading);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(authActions.logout());
+  };
+
+  const publicNav = (
+    <Nav>
+      <Nav.Link eventKey={"register"} as={Link} to="/register">
+        Register
+      </Nav.Link>
+      <Nav.Link eventKey={"login"} as={Link} to="/login">
+        Login
+      </Nav.Link>
+    </Nav>
+  );
+
+  const authNav = (
+    <Nav>
+      <Nav.Link eventKey={"admin"} as={Link} to="/admin">
+        Admin
+      </Nav.Link>
+      <Nav.Link eventKey={"logout"} as={Link} to="/" onClick={logout}>
+        Logout
+      </Nav.Link>
+    </Nav>
+  );
 
   return (
     <div>
-      <Navbar collapseOnSelect expand="lg" style={{backgroundColor:"#dffaf9"}} variant="light">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        style={{ backgroundColor: "#dffaf9" }}
+        variant="light"
+      >
         <Navbar.Brand as={Link} to="/">
-          <img style={{height:'4.5em'}}src={logo} atl="logo"/>
+          <img style={{ height: "4.5em" }} src={logo} atl="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            {/* USE THESE FOR SPECIAL SORTING FEATURES IF POSSIBLE
+          <Nav className="mr-auto"></Nav>
+          {!loading && <>{isAuthenticated ? authNav : publicNav}</>}
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+  );
+};
+
+export default PublicNavBar;
+
+{
+  /* USE THESE FOR SPECIAL SORTING FEATURES IF POSSIBLE
             <Nav.Link href=""></Nav.Link>
             <Nav.Link href=""></Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -36,39 +76,5 @@ const PublicNavBar = () => {
               <NavDropdown.Item href="#action/3.4">
                 Separated link
               </NavDropdown.Item>
-            </NavDropdown> */}
-          </Nav>
-
-          {!isAuthenticated ? (
-            <Nav>
-              <Nav.Link eventKey={"register"} as={Link} to="/register">
-                Register
-              </Nav.Link>
-              <Nav.Link eventKey={"login"} as={Link} to="/login">
-                Login
-              </Nav.Link>
-            </Nav>
-          ) : (
-            <Nav>
-              <Nav.Link eventKey={"admin"} as={Link} to="/admin">
-                Admin
-              </Nav.Link>
-              <Nav.Link
-                eventKey={"logout"}
-                as={Link}
-                to="/login"
-                onClick={() => {
-                  isAuthenticated = false;
-                }}
-              >
-                Logout
-              </Nav.Link>
-            </Nav>
-          )}
-        </Navbar.Collapse>
-      </Navbar>
-    </div>
-  );
-};
-
-export default PublicNavBar;
+            </NavDropdown> */
+}

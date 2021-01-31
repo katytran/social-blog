@@ -5,14 +5,9 @@
 
 html,
 body {
-  width: auto !important;
-  overflow-x: hidden !important;
-  overflow-y: scroll;
-  overflow-x: hidden;
   padding: 0;
   margin: 0;
   background-image: url("https://t4.ftcdn.net/jpg/03/16/76/45/360_F_316764544_Q41R8DGQXRyrkFSlA7MDLRDKAdCKH5tX.jpg");
-  
 }
 
 .CardContainer {

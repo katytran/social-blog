@@ -1,25 +1,33 @@
 import * as types from "../constants/auth.constants";
-import api from '../../apiService'
+import api from "../../apiService";
 
 const login = (email, password) => async (dispatch) => {
-    dispatch({type: types.LOGIN_REQUEST})
-    try {
-    const response = await api.post('/auth/login', {
-        email,
-        password
-    })
-    if(response.data.success === true) {
-        dispatch({type: types.LOGIN_SUCCESS, payload: response.data.data.accessToken})
-    };
-    } catch(error) {
-        dispatch({type: types.LOGIN_FAILURE, payload: error.message})
+  dispatch({ type: types.LOGIN_REQUEST });
+  try {
+    const response = await api.post("/auth/login", {
+      email,
+      password,
+    });
+    if (response.data.success === true) {
+      dispatch({
+        type: types.LOGIN_SUCCESS,
+        payload: response.data.data.accessToken,
+      });
     }
-    
-}
+  } catch (error) {
+    dispatch({ type: types.LOGIN_FAILURE, payload: error.message });
+  }
+};
 
+const logout = () => (dispatch) => {
+  delete api.defaults.headers.common["authorization"];
+  localStorage.removeItem("token");
+  dispatch({ type: types.LOGOUT, payload: null });
+};
 
-const authActions ={
-    login,
-}
+const authActions = {
+  login,
+  logout,
+};
 
-export default authActions
+export default authActions;
