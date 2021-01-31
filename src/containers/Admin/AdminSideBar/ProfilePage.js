@@ -19,20 +19,19 @@ const ProfilePage = () => {
     avatarUrl: currentUser.avatarUrl,
   });
   const dispatch = useDispatch();
+  const [name, setName] = useState(currentUser.name)
+  const [email, setEmail] = useState(currentUser.email)
 
   useEffect(() => {
     dispatch(authActions.getCurrentUser());
   }, [dispatch]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const { name, avatarUrl } = profileData;
     dispatch(authActions.updateProfile(name, avatarUrl));
     setEditable(false);
   };
-  const handleChange = (e) => {
-    setProfileData({ ...profileData, [e.target.name]: [e.target.value] });
-  };
+ 
   const handleCancel = (e) => {
     setEditable(false);
   };
@@ -61,27 +60,27 @@ const ProfilePage = () => {
         <h1>Profile Page</h1>
         <Row>
           <Col className="d-flex justify-content-end align-items-start">
-            <Button variantv="primary" onClick={() => setEditable(true)}>
+            <Button variantv="primary" onClick={(e) => {e.preventDefault(); setEditable(true)}}>
               ✎ Edit
             </Button>
           </Col>
         </Row>
 
         <Row className="row-content">
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={(e)=> {e.preventDefault(); handleSubmit()}}>
             <Form.Group>
               {profileData.avatarUrl && (
                 <img
                   className="avatar_pf"
                   src={profileData.avatarUrl}
-                  atl="avatar"
+                  alt="avatarUrl"
                 />
               )}
             </Form.Group>
             <Button
               className="mb-4"
               variant="primary"
-              onClick={uploadWidget}
+              onClick={(e)=> {e.preventDefault(); uploadWidget()}}
               disabled={!editable}
             >
               Edit Avatar
@@ -98,7 +97,7 @@ const ProfilePage = () => {
                   placeholder="Name"
                   name="name"
                   value={profileData.name}
-                  onChange={handleChange}
+                  onChange={(e)=>{setName(e.target.value)}}
                   disabled={!editable}
                 />
               </Col>
@@ -114,7 +113,7 @@ const ProfilePage = () => {
                   placeholder={profileData.email}
                   name="email"
                   value={profileData.email}
-                  disabled={true}
+                  disabled={!editable}
                 />
               </Col>
             </Form.Group>
@@ -123,7 +122,7 @@ const ProfilePage = () => {
                 <Button className="mr-3" variant="primary" type="submit">
                   Submit
                 </Button>
-                <Button variant="light" onClick={handleCancel}>
+                <Button variant="light" onClick={(e)=>{e.preventDefault(); handleCancel()}}>
                   Cancel
                 </Button>
               </ButtonGroup>

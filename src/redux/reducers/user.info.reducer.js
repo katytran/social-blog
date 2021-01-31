@@ -15,7 +15,7 @@ const userInfo = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: payload.message,
+        user: payload.data,
         registered: true
       };
     default:
