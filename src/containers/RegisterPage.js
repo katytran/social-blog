@@ -45,10 +45,8 @@ const RegisterPage = () => {
     function (error, result) {
       if (result && result.length) {
         setAvatarUrl(result[0].secure_url);
-        console.log()
         console.log(avatarUrl)
       }});}
-  //useDispatch to make the put request
   
   if (!registered) {
     return (
@@ -92,8 +90,6 @@ const RegisterPage = () => {
         </Container>
       </div>
     );
-    // } else if (registered && isAuthenticated) {
-    //   return <div><AdminPage/></div>
   } else if (!isAuthenticated && registered) {
     return (
       <div>
