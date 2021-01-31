@@ -31,10 +31,10 @@ const BlogCard = ({ blog, handleClickBlogCard }) => {
   const classes = useStyles();
 
   return (
-    <Grid style={{cursor:"pointer"}} item xl={12}>
+    <Grid style={{ cursor: "pointer" }} item xl={12}>
       <Card
         className={classes.root}
-        style={{ width: "18rem", height: "25em" }}
+        style={{ width: "25rem", height: "25em" }}
         onClick={() => handleClickBlogCard(blog._id)}
       >
         <CardHeader
@@ -55,6 +55,7 @@ const BlogCard = ({ blog, handleClickBlogCard }) => {
               : "https://image.freepik.com/free-vector/travel-booklet-active-girls-cartoon-flat-ideas-varied-summer_81522-3183.jpg"
           }
           title={blog.title}
+          height="100%"
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
