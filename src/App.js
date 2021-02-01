@@ -4,12 +4,15 @@ import { Switch, Route } from "react-router-dom";
 import HomePage from "./containers/HomePage";
 import LoginPage from "./containers/LoginPage";
 import RegisterPage from "./containers/RegisterPage";
-import AdminPage from "./containers/Admin/AdminPage";
+import ProfilePage from "./containers/Admin/AdminSideBar/ProfilePage"
+import BlogTablePage from "./containers/Admin/AdminSideBar/BlogTablePage"
 import BlogDetailPage from "./containers/BlogDetailPage";
 import AddBlog from "./containers/AddBlog";
 import { BrowserRouter as Router } from "react-router-dom";
 import PublicNavBar from "./components/PublicNavBar";
 import { Row, Col } from "react-bootstrap";
+import FriendsPage from "./containers/Admin/AdminSideBar/FriendsPage";
+import MessengerPage from "./containers/Admin/AdminSideBar/MessengerPage";
 
 function App() {
   return (
@@ -22,7 +25,10 @@ function App() {
         </Row> */}
 
         <Switch>
-          <Route path="/admin" component={AdminPage} />
+          <Route path="/admin/profile" component={ProfilePage} />
+          <Route path="/admin/blog" component={BlogTablePage} />
+          <Route path="/admin/friend" component={FriendsPage}/>
+          <Route path ="/admin/messenger" component={MessengerPage}/>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />

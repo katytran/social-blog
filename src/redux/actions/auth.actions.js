@@ -36,6 +36,7 @@ const logout = () => (dispatch) => {
   dispatch({ type: types.LOGOUT, payload: null });
 };
 
+
 const register = (name, email, password, avatarUrl) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
@@ -77,12 +78,34 @@ const updateBlog = (blogId, title, content, images) => async (dispatch) => {
   }
 };
 
+
+const updateProfile =(name, avatarUrl)=> async (dispatch) =>{
+  dispatch({type: types.UPDATE_PROFILE_REQUEST});
+  try {
+    const url = "/users";
+    const res = await api.put(url,{name, avatarUrl})
+    if (res.data.success===true){
+      dispatch({type: types.GET_USER_SUCCESS, payload: res.data.data})
+    }
+
+  }catch (error){
+    dispatch({type: types.UPDATE_PROFILE_FAILURE, payload: error.message})
+
+  }
+}
+
+
 const authActions = {
   login,
   logout,
+
   register,
   getCurrentUser,
   updateBlog,
+
+
+  updateProfile,
+
 };
 
 export default authActions;

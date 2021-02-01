@@ -30,9 +30,15 @@ const PublicNavBar = () => {
 
   const authNav = (
     <Nav>
-      <Nav.Link eventKey={"admin"} as={Link} to="/admin">
+      {/* <Nav.Link eventKey={"admin"} as={Link} to="/admin/profile">
         Admin
-      </Nav.Link>
+      </Nav.Link> */}
+      <NavDropdown title="Admin" id="collasible-nav-dropdown">
+        <NavDropdown.Item as={Link} to = "/admin/profile">Profile</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to = "/admin/blog">Blogs</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to = "/admin/friend">Friends</NavDropdown.Item>  
+        <NavDropdown.Item as={Link} to = "/admin/messenger">Messenger</NavDropdown.Item>
+      </NavDropdown>
       <Nav.Link eventKey={"logout"} as={Link} to="/" onClick={logout}>
         Logout
       </Nav.Link>

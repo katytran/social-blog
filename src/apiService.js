@@ -4,6 +4,7 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_API,
   // baseURL: "https://social-blog-cs.herokuapp.com/api",
   headers: {
+    "Accept": "text/plain",
     "Content-Type": "application/json",
   },
 });

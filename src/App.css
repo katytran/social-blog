@@ -47,3 +47,16 @@ body {
 .card {
   cursor: pointer;
 }
+.avatar_pf {
+  width: 150px;
+  height: 150px;
+  border-radius: 7em;
+}
+.row-content {
+ margin-left: 80px;
+ 
+}
+.form-input {
+  width: 400px;
+  
+}

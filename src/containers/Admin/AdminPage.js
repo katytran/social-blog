@@ -8,7 +8,7 @@ const AdminPage = () => {
 
   return (
     <div>
-      <AdminTabs />
+      
     </div>
   );
 };
