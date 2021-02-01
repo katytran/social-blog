@@ -10,7 +10,6 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-
     case types.REGISTER_REQUEST:
 
     //login
@@ -44,18 +43,24 @@ const authReducer = (state = initialState, action) => {
       return { ...state, error: payload, loading: false };
     //get current user
     case types.GET_USER_REQUEST:
-      return {...state,loading: true};
+      return { ...state, loading: true };
     case types.GET_USER_SUCCESS:
-      return {...state, isAuthenticated: true, loading: false, user: payload};
+      return { ...state, isAuthenticated: true, loading: false, user: payload };
     case types.GET_USER_FAILURE:
-      return {...state, loading: false};
+      return { ...state, loading: false };
     //update profile
     case types.UPDATE_PROFILE_REQUEST:
-      return {...state,loading: true};
+      return { ...state, loading: true };
     case types.UPDATE_PROFILE_SUCCESS:
-      return {...state, user : {...state.user, payload}, loading: false};
+      return { ...state, user: { ...state.user, payload }, loading: false };
     case types.UPDATE_PROFILE_FAILURE:
-      return {...state, loading: false}
+      return { ...state, loading: false };
+    case types.GET_USER_REQUEST:
+      return { ...state, loading: true };
+    case types.GET_USER_SUCCESS:
+      return { ...state, isAuthenticated: true, loading: false, user: payload };
+    case types.GET_USER_FAILURE:
+      return { ...state, loading: false };
     //logout
     case types.LOGOUT:
       return {

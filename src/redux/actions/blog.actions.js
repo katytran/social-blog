@@ -103,6 +103,7 @@ const updateBlog = (blogId, newBlog) => async (dispatch) => {
   dispatch({ type: types.UPDATE_BLOG_REQUEST, payload: null });
   try {
     const res = await api.put(`/blogs/${blogId}`, newBlog);
+    console.log("new blog", newBlog);
 
     dispatch({
       type: types.UPDATE_BLOG_SUCCESS,

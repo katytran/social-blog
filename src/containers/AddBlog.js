@@ -41,6 +41,7 @@ const AddBlog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (action === "edit") {
+      console.log("new Blog + pic", newBlog);
       dispatch(blogActions.updateBlog(blogId, newBlog));
     } else {
       console.log("newBlog ne", newBlog);

@@ -81,7 +81,7 @@ function BlogDetailPage() {
               src={
                 blogDetail.images.length
                   ? blogDetail.images[0]
-                  : "https://image.freepik.com/free-vector/travel-booklet-active-girls-cartoon-flat-ideas-varied-summer_81522-3183.jpg"
+                  : "https://i.ytimg.com/vi/2QWdjeMRMEw/hqdefault.jpg"
               }
               height="100%"
               width="100%"

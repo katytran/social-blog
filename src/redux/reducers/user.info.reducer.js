@@ -15,13 +15,11 @@ const initialState = {
   user: {},
   registered: false,
   loading: false,
-
 };
 
 const userInfo = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-
     case types.REGISTER_SUCCESS:
       return {
         ...state,
@@ -30,12 +28,6 @@ const userInfo = (state = initialState, action) => {
         registered: true,
       };
 
-    default:
-      return state;
-  }
-};
-
-
     case types.REGISTER_REQUEST:
       return { ...state, loading: true };
     case types.REGISTER_SUCCESS:
@@ -43,7 +35,7 @@ const userInfo = (state = initialState, action) => {
         ...state,
         loading: false,
         user: payload.data,
-        registered: true
+        registered: true,
       };
     default:
       return state;
