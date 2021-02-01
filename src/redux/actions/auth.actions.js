@@ -32,9 +32,9 @@ const getCurrentUser = ()=>async (dispatch) =>{
     const res = await api.get(url);
     console.log("success user", res.data.data)
     if (res.data.success === true) {
+      console.log(res.data.data.name)
       dispatch({type: types.GET_USER_SUCCESS, payload: res.data.data})
     }
-
   } catch (error) {
     dispatch({type: types.GET_USER_FAILURE, payload: error.message})
   }
@@ -46,7 +46,7 @@ const updateProfile =(name, avatarUrl)=> async (dispatch) =>{
     const url = "/users";
     const res = await api.put(url,{name, avatarUrl})
     if (res.data.success===true){
-      dispatch({type: types.GET_USER_SUCCESS,payload: res.data.data})
+      dispatch({type: types.GET_USER_SUCCESS, payload: res.data.data})
     }
 
   }catch (error){

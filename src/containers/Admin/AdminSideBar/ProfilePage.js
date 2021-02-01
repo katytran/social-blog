@@ -13,22 +13,18 @@ import authActions from "../../../redux/actions/auth.actions";
 const ProfilePage = () => {
   const currentUser = useSelector((state) => state.auth.user);
   const [editable, setEditable] = useState(false);
-  // const [profileData, setProfileData] = useState({
-  //   name: currentUser.name,
-  //   email: currentUser.email,
-  //   avatarUrl: currentUser.avatarUrl,
-  // });
   const dispatch = useDispatch();
+  // const name = useSelector(state=>state.auth.user.name)
   const [name, setName] = useState(currentUser.name)
   const [email, setEmail] = useState(currentUser.email)
   const [avatarUrl, setAvatarUrl] = useState(currentUser.avatarUrl)
+  // const avatarUrl = useSelector(state => state.auth.user.avatarUrl)
 
   useEffect(() => {
     dispatch(authActions.getCurrentUser());
   }, [dispatch]);
 
-  const handleSubmit = (e) => {
-    // const { name, avatarUrl } = profileData;
+  const handleSubmit = () => {
     dispatch(authActions.updateProfile(name, avatarUrl));
     setEditable(false);
   };
@@ -92,10 +88,10 @@ const ProfilePage = () => {
                   className="form-input"
                   type="text"
                   required
-                  placeholder={name}
+                  placeholder={useSelector(state=>state.auth.user.name)}
                   name="name"
                   value={name}
-                  onChange={(e)=>{setName(e.target.value)}}
+                  onChange={(e)=>{e.preventDefault(); setName(e.target.value)}}
                   disabled={!editable}
                 />
               </Col>
@@ -108,7 +104,7 @@ const ProfilePage = () => {
                 <Form.Control
                   className="form-input"
                   type="email"
-                  placeholder={email}
+                  placeholder={useSelector(state=>state.auth.user.email)}
                   name="email"
                   value={email}
                   onChange={(e)=>{setEmail(e.target.value)}}

@@ -28,7 +28,7 @@ const authReducer = (state = initialState, action) => {
     case types.UPDATE_PROFILE_REQUEST:
       return {...state,loading: true};
     case types.UPDATE_PROFILE_SUCCESS:
-      return {...state, user : {...state.user,payload}, loading: false};
+      return {...state, user : {...state.user, payload}, loading: false};
     case types.UPDATE_PROFILE_FAILURE:
       return {...state, loading: false}
     //logout
