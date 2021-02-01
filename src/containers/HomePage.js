@@ -10,6 +10,7 @@ import blogActions from "../redux/actions/blog.actions";
 import PaginationBar from "../components/PaginationBar";
 import Grid from "@material-ui/core/Grid";
 import ClipLoader from "react-spinners/ClipLoader";
+import PublicNavBar from "../components/PublicNavBar";
 
 const HomePage = () => {
   const [pageNum, setPageNum] = useState(1);
@@ -76,7 +77,8 @@ const HomePage = () => {
         <ClipLoader color="blue" loading={loading} size={150} />
       ) : (
         <div>
-          {!isAuthenticated? carousel: jumbotron}
+          <PublicNavBar />
+          {!isAuthenticated ? carousel : jumbotron}
           <PaginationBar
             pageNum={pageNum}
             setPageNum={setPageNum}

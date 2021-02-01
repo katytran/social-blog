@@ -14,10 +14,10 @@ function ReviewBlog({
     <div>
       <Form onSubmit={handleSubmitReview}>
         <Form.Group as={Row}>
-          <Form.Label htmlFor="review" column sm="2">
+          <Form.Label htmlFor="review" column sm="2" className="ml-2">
             Review:
           </Form.Label>
-          <Col sm="8">
+          <Col sm="7">
             <Form.Control
               id="review"
               type="text"
@@ -32,7 +32,7 @@ function ReviewBlog({
                 role="status"
                 aria-hidden="true"
               ></span>
-              Submitting Review...
+              Submitting ..
             </Button>
           ) : (
             <Button type="submit" disabled={!review}>

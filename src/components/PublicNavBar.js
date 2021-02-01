@@ -48,7 +48,7 @@ const PublicNavBar = () => {
         variant="light"
       >
         <Navbar.Brand as={Link} to="/">
-          <img style={{ height: "4.5em" }} src={logo} atl="logo" />
+          <img style={{ height: "2em" }} src={logo} atl="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

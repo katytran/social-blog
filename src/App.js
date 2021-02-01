@@ -15,18 +15,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Row>
+        {/* <Row>
           <Col xs={12} className="">
             <PublicNavBar />
           </Col>
-        </Row>
+        </Row> */}
 
         <Switch>
           <Route path="/admin" component={AdminPage} />
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
-          <Route path="/blogs/add" component={AddBlog}/>
+          <Route exact path="/blogs/:action/:blogId" component={AddBlog} />
+          <Route path="/blogs/add" component={AddBlog} />
           <Route exact path="/blogs/:blogId" component={BlogDetailPage} />
         </Switch>
       </Router>
