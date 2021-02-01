@@ -9,7 +9,8 @@ const initialState = {
   //single blog
   selectedBlog: null,
   loadingSelectedBlog: true,
-  loadingSubmitReview: true,
+  loadingSubmitReview: false,
+  loadingSubmitReaction: true,
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -48,8 +49,58 @@ const blogReducer = (state = initialState, action) => {
           reviews: [...state.selectedBlog.reviews, payload],
         },
       };
+
     case types.CREATE_REVIEW_FAILURE:
       return { ...state, loadingSubmitReview: false };
+
+    case types.REACTION_REQUEST:
+      return { ...state, loadingSubmitReaction: true };
+
+    case types.REACTION_SUCCESS:
+      return {
+        ...state,
+        selectedBlog: { ...state.selectedBlog, reactions: payload },
+        loadingSubmitReaction: false,
+      };
+    case types.REVIEW_REACTION_SUCCESS:
+      console.log("hehe", payload.reviewId);
+      return {
+        ...state,
+        selectedBlog: {
+          ...state.selectedBlog,
+          reviews: [
+            ...state.selectedBlog.reviews.map((review) => {
+              if (review._id !== payload.reviewId) return review;
+              return { ...review, reactions: payload.reactions };
+            }),
+          ],
+        },
+        loadingSubmitReaction: false,
+      };
+
+    case types.UPDATE_BLOG_REQUEST:
+      return { ...state, loading: true };
+    case types.UPDATE_BLOG_SUCCESS:
+      return {
+        ...state,
+        selectedBlog: payload,
+        loading: false,
+      };
+    case types.UPDATE_BLOG_FAILURE:
+      return { ...state, loading: false };
+    case types.REACTION_FAILURE:
+      return { ...state, loadingSelectedBlog: false };
+    //delete blog:
+    case types.DELETE_BLOG_REQUEST:
+      return { ...state, loading: true };
+    case types.DELETE_BLOG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        selectedBlog: {},
+      };
+    case types.DELETE_BLOG_FAILURE:
+      return { ...state, loading: false };
     default:
       return state;
   }

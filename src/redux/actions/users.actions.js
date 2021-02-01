@@ -1,5 +1,8 @@
 import * as types from "../constants/users.constants";
-import api from '../../apiService'
+import api from "../../apiService";
+
+
+const userActions = {};
 
 const register = (avatarUrl, name, email, password) => async(dispatch) => {
     dispatch({type: types.REGISTER_REQUEST})
@@ -18,13 +21,5 @@ const register = (avatarUrl, name, email, password) => async(dispatch) => {
             console.log(response.success)
         }
 
-    } catch(error) {
-        dispatch({type: types.REGISTER_FAILURE, payload: error.message})
-    }
-}
 
-const userActions = {
-    register,
-}
-
-export default userActions
+export default userActions;

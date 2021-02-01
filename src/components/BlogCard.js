@@ -52,7 +52,7 @@ const BlogCard = ({ blog, handleClickBlogCard }) => {
           image={
             blog.images.length && blog.images !== null
               ? blog.images[0]
-              : "https://image.freepik.com/free-vector/travel-booklet-active-girls-cartoon-flat-ideas-varied-summer_81522-3183.jpg"
+              : "https://lh3.googleusercontent.com/proxy/tNq8UKiT4t5sO3XJPkuQHHtFnXphftuxNuacQmK7scoWKa4WmzZnYQMSMHrEBsEPGF3kipKQNK9TM1SCcuqODvEacHdV_F7ne5VPFF7gIbtY6nSWoQ"
           }
           title={blog.title}
           height="100%"

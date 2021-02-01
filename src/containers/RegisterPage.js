@@ -1,102 +1,166 @@
-import React, { useState } from "react";
-import { Alert, Form, Col, Container, Row, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import LoginPage from "../containers/LoginPage";
-import AdminPage from "./Admin/AdminPage";
-import userActions from "../redux/actions/users.actions"
-import { queryAllByPlaceholderText } from "@testing-library/react";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import authActions from "../redux/actions/auth.actions";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import FaceIcon from "@material-ui/icons/Face";
+import PublicNavBar from "../components/PublicNavBar";
 
 const RegisterPage = () => {
-  const registered = useSelector((state) => state.user.registered);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const [show, setShow] = useState(true)
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+    avatarUrl: "",
+  });
+
   const dispatch = useDispatch();
-  const formSubmit = (e) => {
-    if (password === confirmPass) {
-      e.preventDefault(); 
-      console.log(avatarUrl[0])
-      dispatch(userActions.register(avatarUrl, name, email, password))
-      console.log('formSubmit is working')
-    } else {
-      // showAlert()
-      console.log(password)
-      console.log(confirmPass)
+  const loading = useSelector((state) => state.auth.loading);
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password, password2, avatarUrl } = formData;
+    if (name === "" || email === "" || password === "" || password2 === "") {
+      alert("Please input all required information");
+      return;
     }
-    dispatch(userActions.register(avatarUrl, name, email, password))
-    
-  }
-  
 
-  // const showAlert = () => { return (<Alert variant="danger" onClose={() => setShow(false)} dismissible>
-  //       <Alert.Heading>Confrim Password</Alert.Heading>
-  //       <p>Please confrim your password again</p>
-  //     </Alert>)}
+    if (password !== password2) {
+      alert("Password does not match");
+      return;
+    }
+    // TODO: handle Register
+    dispatch(authActions.register(name, email, password, avatarUrl));
+  };
 
-  const addImage = () => {window.cloudinary.openUploadWidget(
-    {
-      cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
-      upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
-    },
-    function (error, result) {
-      if (result && result.length) {
-        setAvatarUrl(result[0].secure_url);
-        console.log(avatarUrl)
-      }});}
-  
-  if (!registered) {
-    return (
-      <div>
-        <Container className="justify-content-md-center">
-          <Row className="justify-content-md-center">
-            <Col xs={6}>
-              <Form onSubmit={(e)=> {e.preventDefault(); formSubmit(e)}}>
-                <Row className="justify-content-md-center">
-                  <Form.File id="formcheck-api-regular">
-                    <Form.File.Label>Upload Avatar Url</Form.File.Label>
-                    <Button onClick={()=>{addImage()}}>Add Image</Button>
-                  </Form.File>
-                </Row>
-                <Form.Group controlId="formGroupEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e)=>{setEmail(e.target.value)}} />
-                </Form.Group>
+  const uploadWidget = () => {
+    window.cloudinary.openUploadWidget(
+      {
+        cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+        upload_preset: process.env.REACT_APP_CLOUDINARY_PRESET,
+      },
+      function (error, result) {
+        if (error) console.log(error);
+        if (result && result.length && !error) {
+          setFormData({
+            ...formData,
+            avatarUrl: result[0].secure_url,
+          });
+        }
+      }
+    );
+  };
 
-                <Form.Group controlId="formGroupPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                </Form.Group>
+  return (
+    <div>
+      <PublicNavBar />
+      <Container>
+        <Row>
+          <Col md={{ span: 6, offset: 3 }}>
+            <div className="text-center mb-3">
+              <h1 className="text-danger"> Sign Up</h1>
+              <span>It’s quick and easy.</span> <FaceIcon />
+            </div>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <div className="text-center"></div>
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  type="email"
+                  placeholder="Email Address"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm Password"
+                  name="password2"
+                  value={formData.password2}
+                  onChange={handleChange}
+                />
+              </Form.Group>
 
-                <Form.Group controlId="formGroupConfirmPassword">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control type="confirmPassword" placeholder="Confirm Password" value={confirmPass} onChange={(e)=>{setConfirmPass(e.target.value)}}/>
-                </Form.Group>
+              {formData.avatarUrl && (
+                <div className="mb-3">
+                  <img
+                    height="50%"
+                    width="50%"
+                    src={formData.avatarUrl}
+                    className="avatar-lg"
+                    alt="avatar"
+                  />
+                </div>
+              )}
+              <Button
+                variant="danger"
+                onClick={uploadWidget}
+                sm={3}
+                className="mb-3"
+              >
+                Upload profile picture
+              </Button>
 
-                <Form.Group controlId="formGroupName">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control type="name" placeholder="Name" value={name} onChange={(e)=>{setName(e.target.value)}}/>
-                </Form.Group>
-
-                <Button variant="dark" type="submit">
-                  Submit
+              {loading ? (
+                <Button
+                  className="btn-block"
+                  variant="primary"
+                  type="button"
+                  disabled
+                >
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Loading...
                 </Button>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  } else if (!isAuthenticated && registered) {
-    return (
-      <div>
-        <LoginPage />
-      </div>
-    );
-  }
+              ) : (
+                <Button
+                  className="btn-block"
+                  type="submit"
+                  variant="primary"
+                  sm={6}
+                >
+                  Register
+                </Button>
+              )}
+
+              <p className="mt-2">
+                Already have an account? <Link to="/login">Sign In</Link>
+              </p>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
+
 };
 
 export default RegisterPage;
