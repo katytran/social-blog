@@ -108,6 +108,7 @@ const updateBlog = (blogId, newBlog) => async (dispatch) => {
     dispatch({
       type: types.UPDATE_BLOG_SUCCESS,
       payload: res.data.data,
+      
     });
     toast.configure();
     await toast.success("🦄 Woohoo, Your Blog Has Been Updated!", {
@@ -119,7 +120,9 @@ const updateBlog = (blogId, newBlog) => async (dispatch) => {
       draggable: true,
       progress: undefined,
     });
+
     window.location.replace("http://localhost:3000/");
+
   } catch (error) {
     dispatch({ type: types.UPDATE_BLOG_FAILURE, payload: error });
   }
